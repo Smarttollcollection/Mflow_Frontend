@@ -1,0 +1,20 @@
+.imgLogin {
+    background: linear-gradient(80deg, rgba(0,212,255,1) 5%, rgba(9,9,121,1) 70%, rgba(2,0,36,1) 110%);
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.LoginImg {
+  height: 40vmin;
+  pointer-events: none;
+}
+.buttonLogin {
+    background: rgb(2,0,36);
+    /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
+    background: linear-gradient(80deg, rgba(0,212,255,1) 5%, rgba(9,9,121,1) 70%, rgba(2,0,36,1) 140%);
+}

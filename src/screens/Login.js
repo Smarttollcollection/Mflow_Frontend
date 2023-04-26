@@ -1,4 +1,6 @@
 import * as React from 'react';
+import './Login.css';
+import MflowLogo from "../imgs/MFlowLogo.png"
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,17 +21,39 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const jsonData = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }
+
+    fetch('http://localhost:3333/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(jsonData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status == 'ok') {
+        localStorage.setItem('token', data.token)
+        window.location = '/home'
+        alert('Login Success')
+      } else {
+        alert('Login failed')
+      }
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+    })
   };
 
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid
+        {/* <Grid
           item
           xs={false}
           sm={4}
@@ -42,7 +66,10 @@ export default function Login() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-        />
+        /> */}
+        <Grid className="imgLogin" item xs={false} sm={4} md={7} >            
+        <img src={MflowLogo} className='LoginImg' alt="MflowLogo" />
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -81,6 +108,7 @@ export default function Login() {
                 autoComplete="current-password"
               />
               <Button
+              className='buttonLogin'
                 type="submit"
                 fullWidth
                 variant="contained"
